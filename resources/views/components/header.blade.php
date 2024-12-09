@@ -21,7 +21,7 @@
   display: inline-block;
   margin-top: -35px;
   display:flex;
-  justify-content: space-evenly; 
+  justify-content: space-evenly;
 }
 
 
@@ -32,28 +32,31 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-<div id="topBar"> 
+<div id="topBar">
  <p style="display:block;font-family: Gilroy Regular !important;color: #3c3c3c;text-align: center;
   background-color: #50504b;"><span style="color: #ffff; padding: 5px 0px; margin: 0px !important;
-  font-weight: 700;"><u>CLICK HERE FOR MORE OFFERS</u></span></p> 
-  
+  font-weight: 700;"><u>CLICK HERE FOR MORE OFFERS</u></span></p>
+
 </div>
 
 
-<div id="secondBar"> 
+<div id="secondBar">
  <p style="display:block;text-align: center;"><span style="color: #ffff;
   padding: 5px 0px;
   margin: 0px !important;
-  font-weight: 700;"><img src="{{asset('images/brand.avif');}}"></span></p> </div>
+  font-weight: 700;"><img src="{{asset('images/brand.avif')}}"></span></p> </div>
 
-<div class="row cart-icon" style="float:right">
-<i class="fa-solid fa-cart-shopping fa-3x" id="cart_icon_id" onclick="cartDisplay()"></i><br>  
-<span class="cart" id="cart-item-count" style="display:none" onclick="cartDisplay()"></span>
+<div class="row cart-icon" style="float:right" id="cart_display_option">
+<i class="fa-solid fa-cart-shopping fa-3x" id="cart_icon_id" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="cartDisplay()"></i><br>
+<span class="cart" id="cart-item-count" style="display:none" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" onclick="cartDisplay()"></span>
+</div>
+
+<div class="collapse" id="collapseExample">
 </div>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Shop All</a>
+    <a class="navbar-brand" href="{{url('/product')}}">Shop All</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -68,11 +71,11 @@
         <li class="nav-item">
           <a class="nav-link" href="{{url('/about')}}">Moisturizers</a>
         </li>
-       
+
         <li class="nav-item">
           <a class="nav-link" href="{{url('/about')}}">Face Wash</a>
         </li>
-        
+
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

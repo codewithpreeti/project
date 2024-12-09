@@ -8,7 +8,7 @@ use App\Models\Product;
 
 class userscontroller extends Controller
 {
-   
+
 
     function show($a)
     {
@@ -19,46 +19,103 @@ class userscontroller extends Controller
     {
         // return DB::select("select * from sys.product");
         $products = Product::all();
-        // echo "<pre>";print_r($product->toArray());die;
-      
-        $data = compact('products');
-        // echo "<pre>";print_r($data);die;
+//        echo gettype($products);exit(0);
+//         dd($products);
+        $data = compact('products');    //understand the compact functionality ye same key access hogi users page/view pe
+//        dd($data);
         return view('users',$data);
 
 
     }
 
-    public function productDisplay(Request $request)
+ /*   public function productDisplay(Request $request)
     {
-        
- //both below statement gives same result means request class object $request can be accessed like this
-        // dd($request['all_ids']);
-        // dd($request->all_ids);
-        
-        $receivedIds = $request->all_ids;
-        // print_r($receivedIds).">>>".gettype($receivedIds);die;
-        // $idsOfArray = explode(",",$receivedIds);
-        // dump(array_count_values($idsOfArray));
-        $newArrays = array_count_values($receivedIds);
-        // dd($newArrays);
-        foreach($newArrays as $id=>$qty)
-        {
-            dump($id."and".$qty);
-            // $data = Product::where('id',$id)->get();
-            // dd($data->toSql());
-            // foreach($data as $product)
-            // dd($product->label);
-            
-            // $data['qty']=$qty;
-            // echo"<pre>";print_r($data->toArray());
-            // $productDisplayDatas[] = $data->toArray();
+        $data =$request->input('id');
+//        dump($data);exit;
+//        $row=[];
+//        foreach($data as $id)
+//        {
+//             $query = Product::where('id', $id);
+//           $query = Product::where('id', $id)->ddRawSql(); // This will print the raw SQL query with data binding
+//           break;
 
-        }
-        // echo"<pre>";print_r($productDisplayDatas);
-        // return view('product_display',$productDisplayDatas);
+//        }
+
+        return view('product_display');
+    }*/
+
+     public function productDisplay(Request $request)
+     {
+
+  //both below statement gives same result means request class object $request can be accessed like this
+//          dd($request['all_ids']);  // not best practice in laravel beca it treats it as a array
+//          dd($request->all_ids);
 
 
+         $receivedIds = $request->all_ids;
+//         $receivedIds = [2,2,3]; just to check the functionality of array_count_values()
+         $newArrays = array_count_values($receivedIds);
+//          dump($newArrays);
+//          die;
+//         $productDisplayData=[];
+         foreach($newArrays as $id=>$qty)
+         {
+             $data = Product::find($id);
+//             dump($data);
+//             dump($qty);
+             $data['qty']=$qty;
+//             dump($data);
+             $productDisplayData[] = $data;
+             // $productDisplayData['qty']=$qty;
+
+
+         }
+//          $a = array(
+//              '0'=>array('id'=>12,'name'=>'frfr'),
+//              '1'=>array('id'=>32,'name'=>'cccc'),
+//          );
+//          foreach($a as $r)
+//          {
+//              dump($r['name']);
+//          }
+//          die;
+//          dump($productDisplayData);
+         return view('product_display',['productDisplayData'=>$productDisplayData]);
+         exit();
+
+
+     }
+
+     public function issue_testing()
+     {
+//         return view('test_problem');
+         // return DB::select("select * from sys.product");
+         $products = Product::all();
+//        echo gettype($products);exit(0);
+//         dd($products);
+         $data = compact('products');    //understand the compact functionality ye same key access hogi users page/view pe
+//        dd($data);
+
+         return view('qty_not_updating',$data);
+     }
+
+    public function inc_dec()
+    {
+        return view('inc_dec_page');
     }
 
-   
+//public function productDisplay(Request $request)
+//    {
+//       dump($request['all_ids']);
+//       dd( $_POST['all_ids']);
+
+//        $idsArray = json_decode(urldecode($id), true);
+//        print_r($idsArray);die;
+
+
+//    }
+
+
+
+
 }

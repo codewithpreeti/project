@@ -17,7 +17,7 @@ use App\Http\Controllers\userscontroller;
 // ss
 
 Route::get('/', function () {
-   
+
     return view('welcome');
     // return redirect('home');
 });
@@ -29,13 +29,22 @@ Route::get('/', function () {
 Route::view('/home','hello');
 Route::view('/about','about');
 Route::view('/contact','contact');
+Route::view('/test','test-qty');
 // Route::view('/users','users');
+Route::get('/practice',[userscontroller::class,'practice_arr_obj']);
+
 
 route::GEt('conc/{id}',[userscontroller::class,'show']); // right stmt
-Route::get('conc',[userscontroller::class,'show']);
-Route::get('/concept',[userscontroller::class,'concept']);
+Route::get('conc',[userscontroller::class,'show'])->name('conc');
+Route::get('/concept',[userscontroller::class,'concept']);   // concept function does not exist.
+Route::get('/product',[userscontroller::class,'product']);
 
-Route::get('/users',[userscontroller::class,'product']);
+Route::get('/test_p',[userscontroller::class,'issue_testing']);
+//Route::post('/cart/{id}',[userscontroller::class,'productDisplay'])->name('cart');
 Route::post('/cart',[userscontroller::class,'productDisplay']);
+// Route::post('/cart',[userscontroller::class,'productDisplay']);
+Route::get('/test_array',[userscontroller::class,'test_array']);
+Route::get('/issue_testing',[userscontroller::class,'issue_testing']);
 
-   
+// for testing increment/decrement issue fresh page is created again
+Route::get('/inc_dec',[userscontroller::class,'inc_dec']);
