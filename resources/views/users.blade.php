@@ -6,7 +6,6 @@
 <br><br>
 
 
-
 <div class="container" id="div_imgs">
     <div class="row">
 
@@ -243,23 +242,22 @@
 
 
     function cartDisplay() {
-        var ids=[];
+        var ids = [];
         ids = JSON.parse(localStorage.getItem('arrIds'));
         // console.log(ids);return false;
         $.ajax({
 
             url: '{{url('/cart')}}',
             type: 'POST',
-            data : {
-                'all_ids' : ids
+            data: {
+                'all_ids': ids
             },
             success: function (result) {
                 // alert(data);exit;
-                if(result)
-                {
+                if (result) {
                     $('#div_table').html(result);
                     $('#div_imgs').hide();
-                }else{
+                } else {
                     alert("SOMETHING IS WORNG!!!");
                 }
             },

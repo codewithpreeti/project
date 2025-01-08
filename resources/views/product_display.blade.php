@@ -1,7 +1,7 @@
 <head>
     <script src="{{asset('js/jquery-3.7.1.js')}}"></script>
 </head>
-<div  class="container">
+<div class="container">
     <div class="row">
         <table class="table table-hover">
             <tr>
@@ -12,47 +12,54 @@
                 <th>Remove</th>
 
             </tr>
-         <?php //echo"<pre>";print_r($productDisplayData);die;?>
+
+            <?php //echo"<pre>";print_r($productDisplayData);die;?>
             @php
                 $sno=1;
                 $total=10;
                 //dump($productDisplayData[0]['label']);die;
             @endphp
             @foreach ($productDisplayData as $data)
-            <tr>
-                <td>{{$sno++}}</td>
-                <td>{{$data->label}}</td>
-                <td>
-                    <div class="quantity" id="cart_quantity_div_{{$data->id}}" >
-                        <svg onclick="clickminusqty({{$data->id}})" xmlns="http://www.w3.org/2000/svg"
-                             width="16" height="16" fill="currentColor" class="bi bi-dash-square minus_plus"
-                             viewBox="0 0 16 16">
-                            <path
-                                d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-                        </svg>
+                <tr>
+                    <td>{{$sno++}}</td>
+                    <td>{{$data->label}}</td>
+{{--                    <td>Id is = {{$data->id}} </td>
+                    <td>original price is = {{$data->price}} </td>--}}
+                    <td>
+                        <div class="quantity" id="cart_quantity_div_{{$data->id}}">
+                            <svg onclick="clickminusqty({{$data->id}})" xmlns="http://www.w3.org/2000/svg"
+                                 width="16" height="16" fill="currentColor" class="bi bi-dash-square minus_plus"
+                                 viewBox="0 0 16 16">
+                                <path
+                                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                            </svg>
 
-                        <input type="number" id="cartquantity_{{$data->id}}" class="quantity-input" size="2"
-                               name="quantity" value="{{$data->qty}}">
+                            <input type="number" id="cartquantity_{{$data->id}}" class="quantity-input" size="2"
+                                   name="quantity" value="{{$data->qty}}">
 
-                        <svg onclick="clickaddqty({{$data->id}})" xmlns="http://www.w3.org/2000/svg"
-                             width="16" height="16" fill="currentColor" class="bi bi-plus-square plus_minus"
-                             viewBox="0 0 16 16">
-                            <path
-                                d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                            <path
-                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                        </svg></div>
+                            <svg onclick="clickaddqty({{$data->id}})" xmlns="http://www.w3.org/2000/svg"
+                                 width="16" height="16" fill="currentColor" class="bi bi-plus-square plus_minus"
+                                 viewBox="0 0 16 16">
+                                <path
+                                    d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                                <path
+                                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                            </svg>
+                        </div>
 
                     </td>
-{{--                <td>{{$data->qty}}</td>--}}
-                <input type="hidden" name="originalPrice" id="originalPrice{{$data->id}}" value="{{$data->price }}">
-                <td id="price_data{{$data->id}}">{{$data->qty * $data->price }}</td>
-                <td><a href="#" onclick="deleteItem('{{$data->id}}')"><i class="fa fa-trash" style='color:red' aria-hidden="true"></i>
-                    </a></td>
+                    {{--                <td>{{$data->qty}}</td>--}}
+                    <input type="hidden" name="originalPrice" id="originalPrice{{$data->id}}" value="{{$data->price }}">
+                    <td id="price_data{{$data->id}}">{{$data->qty * $data->price }}</td>
+                    <td><a href="#" onclick="deleteItem('{{$data->id}}')"><i class="fa fa-trash" style='color:red'
+                                                                             aria-hidden="true"></i>
+                        </a></td>
 
-            </tr>
+                </tr>
+
             @endforeach
+            <tr><th>Grand Total</th><td colspan="2">sdf</td></tr>
         </table>
 
     </div>
@@ -60,11 +67,17 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
 <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.min.css " rel="stylesheet">
 <script>
-    function deleteItem(id)
-    {
+
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    function deleteItem(id) {
 
         // alert(id);
-        var count=0;
+        var count = 0;
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -77,18 +90,18 @@
             if (result.isConfirmed) {
                 console.log(id);
                 // console.log(localStorage.getItem('arrIds'));
-                arrIds =[];
+                arrIds = [];
                 arrIds = JSON.parse(localStorage.getItem('arrIds'));
                 // console.log(arrIds);
                 for (let item of arrIds) {
                     // console.log(item);
                     if (item == id) {
-                       count++;
+                        count++;
                     }
                 }
                 // console.log(count+" ??"+ typeof count);return false;
-                newarrIds = arrIds.filter(function(item){
-                    return (item !=id);
+                newarrIds = arrIds.filter(function (item) {
+                    return (item != id);
                 });
                 // console.log(typeof newarrIds+">>>"+ newarrIds);
                 localStorage.setItem('arrIds', JSON.stringify(newarrIds));
@@ -122,9 +135,9 @@
         // console.log($('#quantity_' + id).val());
         // alert(id+"~~~~~~"+typeof(id));
         // alert($('#price_data').html());return false;   // PRCIE UPDATE KE LIYE VALUE
-        var Org_price = $('#originalPrice'+id).val();
-        var new_price = parseInt(valIncr)*parseInt(Org_price);
-        $('#price_data'+id).html(new_price);
+        var Org_price = $('#originalPrice' + id).val();
+        var new_price = parseInt(valIncr) * parseInt(Org_price);
+        $('#price_data' + id).html(new_price);
 
         storedArr = JSON.parse(localStorage.getItem('arrIds'));
         // console.log(storedArr+">>>>>>>");
@@ -139,24 +152,33 @@
     }
 
     function clickminusqty(id) {
-        // alert($('#quantity_'+id).val()+">>>>>>>>..."+typeof $('#quantity_'+id).val());
+       // alert($('#quantity_' + id).val() + ">>>>>>>>..." + typeof $('#quantity_' + id).val());
+        // return false;
         var qtyToDecre = $('#cartquantity_' + id).val();
+        // alert(qtyToDecre);
+        // return;
         if (qtyToDecre == 1) {
-            $('#add_to_cart_' + id).show();
-            $('#cart_quantity_div_' + id).hide();
+            // alert(document.getElementById('cart_display_option').textContent);return false;
+            // $('#add_to_cart_' + id).show();
+            // $('#cart_quantity_div_' + id).hide();   YAHAN PE AGAR 1 hota hai toh  puri row ko hatana hai
+           // return redirect('/cart');
+
         } else {
             var newValue = parseInt(qtyToDecre) - 1;
             document.getElementById('cartquantity_' + id).value = newValue;
-            var Org_price = $('#originalPrice'+id).val();
-            var new_price = parseInt(newValue)*parseInt(Org_price);
-            $('#price_data'+id).html(new_price);
+            var Org_price = $('#originalPrice' + id).val();
+            var new_price = parseInt(newValue) * parseInt(Org_price);
+            $('#price_data' + id).html(new_price);
         }
 
         // console.log(document.getElementById('cart_display_option').textContent); or cart_item_count same works see definition of textContent
         var checkCartCount = document.getElementById('cart_display_option').textContent;
         var updateCartCount = 0;
         if (checkCartCount == 1) {
-            $('#cart-item-count').hide();
+            // $('#cart-item-count').hide();
+            window.location.href ='/product';
+            // window.location.href ='/issue_testing';  goes to web.php ke routes pe
+
         } else {
             // console.log(typeof checkCartCount);
             updateCartCount = parseInt(checkCartCount) - 1;
@@ -178,8 +200,35 @@
             }
             localStorage.setItem('arrIds', JSON.stringify(updateArrIds));
         }
+        cartDisplay();
 
 
+    }
+
+    function cartDisplay() {
+        var ids = [];
+        ids = JSON.parse(localStorage.getItem('arrIds'));
+        // console.log(">>"+ids);return false;
+        $.ajax({
+
+            url: '{{url('/cart')}}',
+            type: 'POST',
+            data: {
+                'all_ids': ids
+            },
+            success: function (result) {
+                // alert(data);exit;
+                if (result) {
+                    $('#div_table').html(result);
+                    $('#div_imgs').hide();
+                } else {
+                    alert("SOMETHING IS WORNG!!!");
+                }
+            },
+            error: function (request, error) {
+                alert("Request: " + JSON.stringify(request));
+            }
+        });
     }
 
 </script>
